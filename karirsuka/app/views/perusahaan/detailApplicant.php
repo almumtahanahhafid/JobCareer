@@ -1,11 +1,12 @@
 <?php
 $user = $data["user"];
-$applicants = $data["applicant"];
+$lowongan = $data["lowongan"];
+$applicants = $data["applicants"];
 ?>
 
 <div class="container" style="align:center; margin-top: 100px;">
 <h6 style="color:#A4A4A4">Detail Applicant</h6>
-<h4><b><?= $user["judul"]; ?> - <?= $user["namaPerush"]; ?></b></h4>
+<h4><b><?= $lowongan["judul"]; ?> - <?= $user["namaPerush"]; ?></b></h4>
 <br><br>
 
 <!-- Check box -->
@@ -33,39 +34,35 @@ $applicants = $data["applicant"];
 
     <div class="col-sm-8 border shadow-sm p-3 mb-5 bg-body rounded">
         <div class="container">
-            <div class="row border"> 
-                <div class="col">
-                    <img src="foto1.png" alt="Logo" style="width:120px; height:120px; margin-top:30px">
+        
+          <?php
+          foreach ($applicants as $applicant) { ?>
+
+            <div class="card p-4">
+              <div class="row">
+                <div class="col-auto">
+                  <?= '<img src="data:image/jpeg;base64,' . base64_encode($applicant["photo"]) . '" alt="Logo" style="width:120px;">' ?>
                 </div>
-                <div class="col-6">
-                    <h5 style="text-align:left; margin-top:30px;"><b>Siti Rahmah</b></h5><br>
-                    <h8 style="color:#676767;">Skill : </h8><br>
-                    <h8 style="color:#676767;">Prodi :</h8><br>
-                    <h8 style="color:#676767;">IPK :</h8>
+                <br><br>
+                <div class="col-auto me-3">
+                  <h4 style="text-align:left;"><b><?= $applicant["nama"]; ?></b></h4>
+                  <h8 style="color:#676767;">Skill : <?= $applicant["kompetensi"];; ?></h8><br>
+                  <h8 style="color:#676767;">Prodi : <?= $applicant["programStudi"];; ?></h8><br>
+                  <h8 style="color:#676767;">IPK : <?= $applicant["ipk"];; ?></h8><br>
                 </div>
-                <div class="col" style="margin-top:80px">
-                    <h8 style="text-align:right; font-size:12px; color:#8A8A8A;">Contact:</h8><br>
-                    <h8 style="text-align:right; font-size:12px; color:#1F5938;">081234567891</h8><br>
-                    <h8 style="text-align:right; font-size:12px; color:#1F5938; margin-right:25px">siti.rahma@gmail.com</h8>
+               
+                <div class="col-auto mt-4 mb-2 ps-5">
+                    <h8 style="text-align:right; color:#8A8A8A;">Contact:</h8><br>
+                    <h8 style="color:#676767;"><?= $applicant["hp_skrg"];; ?></h8><br>
+                    <h8 style="color:#676767;"><?= $applicant["email"];; ?></h8>
                 </div>
-            </div><br>
-            <div class="row border"> 
-                <div class="col">
-                    <img src="foto2.png" alt="Logo" style="width:120px; height:120px; margin-top:30px">
-                </div>
-                <div class="col-6">
-                    <h5 style="text-align:left; margin-top:30px;"><b>Zulkarnain</b></h5><br>
-                    <h8 style="color:#676767;">Skill : </h8><br>
-                    <h8 style="color:#676767;">Prodi :</h8><br>
-                    <h8 style="color:#676767;">IPK :</h8>
-                </div>
-                <div class="col" style="margin-top:80px">
-                    <h8 style="text-align:right; font-size:12px; color:#8A8A8A;">Contact:</h8><br>
-                    <h8 style="text-align:right; font-size:12px; color:#1F5938;">081234567891</h8><br>
-                    <h8 style="text-align:right; font-size:12px; color:#1F5938; margin-right:25px">zulkarnain@gmail.com</h8>
-                </div>
-            </div><br>
-        </div>
+                <a href="<?= BASE_URL ?>perusahaan/history/<?= $applicant["idLowongan"]; ?>" class="stretched-link"></a>
+
+              </div>
+            </div><br> 
+          <?php } ?>   
+       
+      </div>
     </div>
     </div>
    </div>
