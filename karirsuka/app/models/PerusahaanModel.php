@@ -47,13 +47,14 @@ class PerusahaanModel
   }
 
   //update profile
-  public function updateDataAlumni()
+public function updateDataPerush()
   {
-    $idPerush = $_POST["inputid"];
+    $idPerush = $_POST["idPerush"];
     $inputName = $_POST["inputName"];
+    $inputID = $_POST["inputID"];
     $inputCPName = $_POST["inputCPName"];
     $inputCPNumber = $_POST["inputCPNumber"];
-    $inputFax = $_POST["inputFax"];
+    $inputFaxNumber = $_POST["inputFaxNumber"];
     $inputStreet = $_POST["inputStreet"];
     $inputCity = $_POST["inputCity"];
     $inputState = $_POST["inputState"];
@@ -66,31 +67,32 @@ class PerusahaanModel
 
     $query = 'UPDATE perusahaan
             SET namaPerush=:inputName,
-            namaCP=:inputCPName,
+            namaCp=:inputCPName,
             streetPerush=:inputStreet, 
+            idPerush=:inputID,
             cityPerush=:inputCity, 
             statePerush=:inputState, 
             zipCode=:inputZip, 
-            telpCP=:inputCPNumber,
+            telpCp=:inputCPNumber,
             tentangPerush=:inputAbout,
-            telpFaxPerush=:inputFax,
-            passwordAlumni=:pass
-            WHERE idPerush=:inputid';
+            telpFaxPerush=:inputFaxNumber,
+            passwordPerush=:pass
+            WHERE idPerush=:idPerush';
 
     $this->db->query($query);
     $this->db->bind('idPerush', $idPerush);
+    $this->db->bind('inputID', $inputID);
     $this->db->bind('inputName', $inputName);
-    $this->db->bind('inputNameCP', $inputCPName);
+    $this->db->bind('inputCPName', $inputCPName);
+    $this->db->bind('inputCPNumber', $inputCPNumber);
     $this->db->bind('inputStreet', $inputStreet);
     $this->db->bind('inputCity', $inputCity);
     $this->db->bind('inputState', $inputState);
     $this->db->bind('inputZip', $inputZip);
-    $this->db->bind('inputPhone', $inputCPNumber);
-    $this->db->bind('inputFax', $inputFax);
+    $this->db->bind('inputFaxNumber', $inputFaxNumber);
     $this->db->bind('inputAbout', $inputAbout);
     $this->db->bind('pass', $pass);
     return $this->db->rowCount();
   }
-
  
 }
