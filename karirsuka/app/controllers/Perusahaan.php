@@ -132,23 +132,21 @@ class Perusahaan extends Controller
     $this->view('templates/footer');
 
   }
-
-  public function detailApplicant()
+  
+  public function detailapplicant($idLowongan = "")
   {
-
     if (!$this->hasLoginSession()) {
       header("Location: " . BASE_URL . "perusahaan/login");
       exit;
     }
 
-    // $activeUser = $_SESSION["activeUser"];
-    // $data["user"] = $this->model('PerusahaanModel')->getPerushByEmail($activeUser);
-    // $idLowongan = $data["user"]["idLowongan"];
-    // $data["applicant"] = $this->model('LowonganModel')->detailApplicant($idLowongan);
-
+    $activeUser = $_SESSION["activeUser"];
+    $data["user"] = $this->model('PerusahaanModel')->getPerushByEmail($activeUser);
+    $data["lowongan"] = $this->model('LowonganModel')->getLowonganById($idLowongan);
+    $data["applicants"] = $this->model('AlumniModel')->getApplicantById($idLowongan);
 
     $this->view('templates/headerPerusahaan');
-    $this->view("perusahaan/detailApplicant");
+    $this->view("perusahaan/detailApplicant", $data);
     $this->view('templates/footer');
   }
 
@@ -199,6 +197,5 @@ class Perusahaan extends Controller
     $this->view("templates/error",);
     $this->view('templates/footer');
   }
-
   
 }
