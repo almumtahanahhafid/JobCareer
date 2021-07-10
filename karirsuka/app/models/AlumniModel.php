@@ -125,4 +125,16 @@ class AlumniModel
 
     return $this->db->singleSet();
   }
+  
+  public function getApplicantById($idLowongan)
+  {
+    $query = 'SELECT  al.nama, al.photo, al.kompetensi, al.kompetensi, al.programStudi, al.ipk, al.hp_skrg, al.email, pl.idLowongan, pl.judul FROM alumni al 
+    LEFT OUTER JOIN aplication ap ON al.nim= ap.nim 
+    LEFT OUTER JOIN perusahaan_lowongan pl ON ap.idLowongan = pl.idLowongan
+    WHERE pl.idLowongan=:idLowongan';
+
+    $this->db->query($query);
+    $this->db->bind('idLowongan', $idLowongan);
+    return $this->db->resultSet();
+  }
 }
