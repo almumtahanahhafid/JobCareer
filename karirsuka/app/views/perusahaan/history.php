@@ -29,7 +29,6 @@ $vacancies = $data["application"];
                                     <th scope="col">Job Title</th>
                                     <th scope="col">Lowongan</th>
                                     <th scope="col">Post Date</th>
-                                    <th scope="col">Total Register</th>
                                     <th scope="col">Applicant</th>
                                 </tr>
                             </thead>
@@ -43,7 +42,6 @@ $vacancies = $data["application"];
                                         <td><?= $vacancy["judul"]; ?></td>
                                         <td><?= $vacancy["lowongan"]; ?></td>
                                         <td><?= $vacancy["tglMasuk"]; ?></td>
-                                        <td><?= $vacancy["lowongan"]; ?></td>
                                         <td>
                                             <a class="btn" href="<?= BASE_URL; ?>perusahaan/detailApplicant" style="background-color: #8DAA9A; color: #fff;">Details</a>
                                         </td>
