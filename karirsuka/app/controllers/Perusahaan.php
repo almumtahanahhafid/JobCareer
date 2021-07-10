@@ -94,7 +94,7 @@ class Perusahaan extends Controller
   {
     session_unset();
     session_destroy();
-    header("Location: " . BASE_URL);
+    header("Location: " . BASE_URL . "perusahaan/index");
     exit;
   }
 
