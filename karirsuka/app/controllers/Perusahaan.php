@@ -150,51 +150,46 @@ class Perusahaan extends Controller
     $this->view('templates/footer');
   }
 
-  public function postJob()
-  {
-    $this->view('templates/headerPerusahaan');
-    $this->view("perusahaan/postjob");
-    $this->view('templates/footer');
-  }
-
-  public function postingJob($idLowongan = "", $idPerush = "")
+  public function postjob()
   {
     if (!$this->hasLoginSession()) {
       header("Location: " . BASE_URL . "perusahaan/login");
       exit;
-    } else if ($idPerush == "" || $idLowongan == "") {
-      header("Location: " . BASE_URL);
-      exit;
     }
-    
-    $isPost = $this->model('LowonganModel')->isPost($idPerush, $idLowongan);
-    if ($isPost) {
-      header("Location: " . BASE_URL . "perusahaan/error");
-      exit;
 
-    } else {
-      $data = $this->model('LowonganModel')->postJob($idPerush, $idLowongan);
+    $activeUser = $_SESSION["activeUser"];
+    $data["user"] = $this->model('PerusahaanModel')->getPerushByEmail($activeUser);
+    
+    $this->view('templates/headerPerusahaan');
+    $this->view("perusahaan/postjob", $data);
+    $this->view('templates/footer');
+  }
+
+  public function postingjob($idPerush = "")
+  {
+      $data = $this->model('PerusahaanModel')->postJob($_POST);
+    
       if ($data > 0) {
-        header("Location: " . BASE_URL . "perusahaan/success");
+        header("Location: " . BASE_URL . "perusahaan/successPost");
         exit;
       } else {
-        header("Location: " . BASE_URL . "perusahaan/error");
+        header("Location: " . BASE_URL . "perusahaan/errorPost");
         exit;
       }
     }
   }
 
-  public function success()
+  public function successPost()
   {
     $this->view('templates/headerPerusahaan');
-    $this->view("templates/success");
+    $this->view("templates/successPost");
     $this->view('templates/footer');
   }
 
-  public function error()
+  public function errorPost()
   {
     $this->view('templates/headerPerusahaan');
-    $this->view("templates/error",);
+    $this->view("templates/errorPost",);
     $this->view('templates/footer');
   }
   
