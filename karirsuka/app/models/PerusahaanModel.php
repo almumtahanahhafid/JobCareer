@@ -94,5 +94,28 @@ public function updateDataPerush()
     $this->db->bind('pass', $pass);
     return $this->db->rowCount();
   }
+  
+  //PostJob
+    public function postJob($data)
+  {
+
+    $query = "INSERT INTO `perusahaan_lowongan` 
+          (`idPerush`, `idlowongan`,`judul`, `deskripsi`, `syarat`, `salary`, `batasLowongan`, `kompetensi`, `lowongan`, `lokasi`)
+          VALUES (:idPerush, :idlowongan, :judul, :deskripsi, :syarat, :salary, :batasLowongan, :kompetensi, :lowongan, :lokasi);";
+
+    $this->db->query($query);
+    $this->db->bind('idPerush', $data["idPerush"]);
+    $this->db->bind('idlowongan', rand(0, 999999));
+    $this->db->bind('judul', $data["judul"]);
+    $this->db->bind('deskripsi',$data["deskripsi"]);
+    $this->db->bind('syarat', $data["syarat"]);
+    $this->db->bind('salary', $data["salary"]);
+    $this->db->bind('batasLowongan', $data["batasLowongan"]);
+    $this->db->bind('kompetensi', $data["kompetensi"]);
+    $this->db->bind('lowongan', $data["lowongan"]);
+    $this->db->bind('lokasi', $data["lokasi"]);
+
+    return $this->db->rowCount();
+  }
  
 }
