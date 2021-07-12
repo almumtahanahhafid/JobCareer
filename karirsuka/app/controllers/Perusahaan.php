@@ -193,4 +193,26 @@ class Perusahaan extends Controller
     $this->view('templates/footer');
   }
   
+ public function update()
+  {
+    if (!$this->hasLoginSession()) {
+      header("Location: " . BASE_URL . "perusahaan/login");
+      exit;
+    }
+
+    $email = $_POST["inputEmail"];
+    $oldPassword = $_POST['inputOldPassword'];
+    $newPassword = $_POST['inputNewPassword'];
+
+    $login = $this->model('PerusahaanModel')->loginPerush($email, $oldPassword);
+    if ($login == 0) {
+      header("Location: " . BASE_URL . "perusahaan/profile/0");
+      exit;
+    } else {
+      $data = $this->model('PerusahaanModel')->updateDataPerush();
+      header("Location: " . BASE_URL . "perusahaan/profile");
+    
+    }
+  }
+
 }
